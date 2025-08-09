@@ -154,19 +154,19 @@ is_admin(опционально)
 ## Тестовые данные
 После первого запуска создаются тестовые пользователи:
 
-Администратор:
+### Администратор:
 
 Email: admin@test.com
 
 Пароль: admin123
 
-Обычный пользователь:
+### Обычный пользователь:
 
 Email: user@test.com
 
 Пароль: user123
 
-Docker
+## Docker
 Для локальной разработки рекомендуется использовать Docker:
 
 docker-compose up --build
@@ -174,9 +174,12 @@ docker-compose up --build
 
 Доступ к Adminer (для управления БД): http://localhost:8080
 
+## Postman
+
 Файл с API для Postman: payments.postman_collection.json 
 
-Структура проекта
+## Структура проекта
+
 project/
 │
 ├── app/
@@ -188,9 +191,7 @@ project/
 ├── pyproject.toml
 ├── mypy.ini
 ├── seed.sql
-├── docker/
-│ ├── /web/Dockerfile
-│ └── /db/Dockerfile
+├── Dockerfile
 ├── docker-compose.yml
 ├── payments.postman_collection.json
 ├── LICENSE.md
