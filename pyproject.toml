@@ -1,0 +1,23 @@
+[project]
+name = "pay"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+license = "LICENCSE.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "jwt>=1.4.0",
+    "psycopg2-binary>=2.9.10",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.1",
+    "pyjwt>=2.10.1",
+    "sanic[ext]>=25.3.0",
+    "sqlalchemy[asyncio]>=2.0.42",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1",
+    "ruff>=0.12.8",
+]
+

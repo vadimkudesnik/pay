@@ -1,0 +1,60 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    image: finance-app
+    container_name: finance-app
+    ports:
+      - "8000:8000"
+    environment:
+      - SANIC_HOST=0.0.0.0
+      - SANIC_PORT=8000
+      - SANIC_ACCESS_LOG=True
+      - SANIC_DEBUG=True
+      - SANIC_DEV=True
+      - SANIC_WORKERS=1
+      - SANIC_AUTO_RELOAD=True
+      - SANIC_POSTGRES_DB=payments
+      - SANIC_POSTGRES_USER=admin
+      - SANIC_POSTGRES_PASSWORD=2204156
+      - SANIC_POSTGRES_HOST=db
+      - SANIC_POSTGRES_PORT=5432
+      - SANIC_SECRET_KEY=gfdmhghif38yrf9ew0jkf32
+      - SANIC_JWT_EXPIRATION=3600
+      - SANIC_ALGORITHM=HS256
+      - SANIC_TEST_ADMIN_EMAIL=admin@test.com
+      - SANIC_TEST_ADMIN_PASSWORD=admin123
+      - SANIC_TEST_USER_EMAIL=user@test.com
+      - SANIC_TEST_USER_PASSWORD=user123
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
+    image: finance-db
+    container_name: finance-db
+    environment:
+      - POSTGRES_DB_HOST=localhost
+      - POSTGRES_DB=payments
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=2204156
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
