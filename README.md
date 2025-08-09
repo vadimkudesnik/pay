@@ -174,6 +174,8 @@ docker-compose up --build
 
 Доступ к Adminer (для управления БД): http://localhost:8080
 
+Файл с API для Postman: payments.postman_collection.json 
+
 Структура проекта
 project/
 │
@@ -190,5 +192,6 @@ project/
 │ ├── /web/Dockerfile
 │ └── /db/Dockerfile
 ├── docker-compose.yml
+├── payments.postman_collection.json
 ├── LICENSE.md
 └── README.md

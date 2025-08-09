@@ -1,0 +1,438 @@
+{
+	"info": {
+		"_postman_id": "561eb49d-a1ad-4136-b8a0-7e6b31cc9b3b",
+		"name": "payments",
+		"description": "> This collection features end-to-end tests that ensure the Intergalactic Bank API components function in an expected sequence. Check out the [Functional testing collection](https://www.postman.com/templates/f26ad070-d626-4d75-b151-7cbf1a48ed11/Functional-testing) and [Integration testing collection](https://www.postman.com/templates/6f788c17-067a-4074-a528-d07df1df9529/Integration-testing-%23example) for other test cases for this API. \n  \n\n## **🪐 Get started**\n\nThe fictional Intergalactic Bank Services team is responsible for testing the end-to-end workflows in this collection. You can use this collection to validate specific workflows for your team or figure out ways to increase your test coverage and make your applications more resilient.\n\nTo test the Intergalactic Bank API, you can:\n\n1. **Review tests and scripts:** Check out the [tests](https://learning.postman.com/docs/writing-scripts/test-scripts/) in the Scripts tab of a collection, folder, or request. You’ll also find additional steps in the Pre-request Script, such as for passing data between requests or building up POST request payloads.\n    \n2. **Run tests:** To run the collection, select Run collection from the collection menu. If you are interested in testing one of the use cases, select Run folder from the use case folder menu. Keep in mind that many of these tests contain logic that passes information between requests, and they are meant to be run in order from top to bottom. If you send the requests manually or out of order, your results may vary.\n    \n3. **Review test results:** Many of the test cases contain error messages to help debug service errors. If you’re using this collection as a pre-merge check, ensure that all tests are passing before submitting (and no, deleting the failing test cases isn’t an option 😉).\n    \n\nCheck out the additional sections below or select View complete documentation. For context-sensitive help with a folder or request, look for the documentation icon.\n\n## 🧑‍💻How your team can use this collection\n\n- **Add a mock server to speed up development:** Adding functionality to this service? Since this collection has example responses, you can add a mock server that will return the expected results. Start writing tests against the mock, and once your additions are live, you can swap out the URLs and have a live test suite.\n    \n- **Integrate tests with your CI/CD pipeline:** This comprehensive test suite is a great addition to your existing CI/CD pipeline. Generate the Postman CLI command from the Collection Runner and add this step to your existing checks each time you make a commit affecting this service.\n    \n- **Add a monitor:** If your team is contributing to or relying on this service, it’s a good idea to keep tabs on the status. Adding a monitor to this collection can give you confidence that the service is up and running and alert you to any breaking changes that may have occurred.\n    \n\n## 🔍 What we’re testing\n\n- A very common workflow is the transfer of funds between accounts. We have two scenarios: one which creates all resources and successfully transfers funds, and one which tries the transfer with insufficient funds.\n    \n- During these workflows, we are testing for data correctness, data types, and that data is successfully passed through the system during creation and retrieval.\n    \n\n## 🔒A note on authorization\n\nThis API uses an API key-based authorization. In this collection, we set the authorization at the collection level and generate a new API Key for each test run.\n\n## 👀 View and share run results\n\nInterested in seeing previous run results? We’re happy to share, and have a few ways for you to stay in the loop:\n\n- **Runs tab:** View past collection runs in the `Runs` tab of this collection. Here, you can see the results of past runs, including who ran them and whether it was via the Collection Runner or the CLI. You can also share individual run reports from this page.\n    \n- **Monitors:** If you have a monitor set up for this collection, you can see historical run information when you select the Monitors tab in the left sidebar. You can also have the results sent to Slack or other services when you set up a corresponding integration.\n    \n\n### 🤝Increase test coverage\n\nThe Intergalactic Bank Services team wants your team to have everything they need to successfully test our services with their applications. Is your team utilizing this API in a use case not represented here? Reach out to us on our internal Slack by tagging `@bank-services`. Or add an [inline comment](https://learning.postman.com/docs/collaborating-in-postman/working-with-your-team/discussing-your-work/) to this collection with your test case suggestions.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10153642",
+		"_collection_link": "https://sanic0.postman.co/workspace/5db135c4-b014-4eff-8a9f-27a83877c3b5/collection/10153642-561eb49d-a1ad-4136-b8a0-7e6b31cc9b3b?action=share&source=collection_link&creator=10153642"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"admin@test.com\", \"password\": \"admin123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/auth",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/me",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/me/accounts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"me",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_by_id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payments_by_id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/1/payments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accounts_by_id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/1/accounts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": \"32\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/delete",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": \"1\", \"email\": \"ccc@test.com\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/update",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/users/me/payments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"me",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-add",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"vadim.sauschkin@yandex.ru\",\r\n        \"password\":\"2204156\",\r\n        \"full_name\":\"Vadim\",\r\n        \"is_admin\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/users/add",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"transaction_id\": \"5eae174f-7cd0-472c-bd36-35660f00132b\",\r\n  \"user_id\": 1,\r\n  \"account_id\": 1,\r\n  \"amount\": 100,\r\n  \"signature\": \"7b47e41efe564a062029da3367bde8844bea0fb049f894687cee5d57f2858bc8\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/webhook",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "api-key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
