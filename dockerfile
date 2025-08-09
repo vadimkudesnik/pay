@@ -14,7 +14,7 @@ RUN python --version && which python && uv --version
 
 # Копируем файл зависимостей и устанавливаем их
 RUN uv self update
-RUN uv sync --locked
+
 
 # Копируем код приложения
 COPY . .
