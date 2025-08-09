@@ -2,7 +2,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: ./docker/web/Dockerfile
+      dockerfile: Dockerfile
     image: finance-app
     container_name: finance-app
     ports:
@@ -33,10 +33,7 @@ services:
       - .:/app
 
   db:
-    build:
-      context: .
-      dockerfile: ./docker/db/Dockerfile
-    image: finance-db
+    image: postgres:13
     container_name: finance-db
     environment:
       - POSTGRES_DB_HOST=localhost
